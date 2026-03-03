@@ -41,5 +41,13 @@ public class MovieController {
 
         }
 
-
+    @GetMapping("/api/movies/title/{movieTitle}")
+    public ResponseEntity<?> getMovieByTitle(@PathVariable String movieTitle){
+        Movie foundMovie=movieService.getMovieByTitle(movieTitle);
+        if(foundMovie!=null){
+            return ResponseEntity.ok(foundMovie);
+        }else {
+            return  ResponseEntity.status(404).body("pelicula no encontrada");
+        }
+    }
 }

@@ -23,5 +23,8 @@ private final MovieRepository movieRepository;
     public Movie getMovieById(Integer movieId){
         return movieRepository.findById(movieId).orElse(null);
     }
-
+    public Movie getMovieByTitle(String movieTitle){
+        List<Movie>movieList= movieRepository.findAll();
+        return movieList.stream().filter(m -> m.getTitle().equalsIgnoreCase(movieTitle)).findFirst().orElse(null);
+    }
 }
