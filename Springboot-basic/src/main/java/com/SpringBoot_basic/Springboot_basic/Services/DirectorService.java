@@ -41,4 +41,27 @@ public class DirectorService {
     public List<Movie> getMoviesByDirectorName(String name){
         return movieRepository.findByDirectorNameContainingIgnoreCase(name);
     }
+
+    public Director postDirector(Director director){
+        director.setMovieList(null);
+        return directorRepository.save(director);
+    }
+
+    public Director putDirectorById(Integer id,Director director){
+        if(directorRepository.existsById(id)){
+            director.setId(id);
+            return directorRepository.save(director);
+        }else{
+            return null;
+        }
+    }
+    public Boolean deleteDirectorById(Integer id){
+
+        if(directorRepository.existsById(id)){
+            directorRepository.deleteById(id);
+            return  true;
+        }else {
+            return false;
+        }
+    }
     }

@@ -6,9 +6,7 @@ import com.SpringBoot_basic.Springboot_basic.Services.DirectorService;
 import com.SpringBoot_basic.Springboot_basic.Services.MovieService;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -87,5 +85,43 @@ public class DirectorController {
         }catch (Exception e){
             return ResponseEntity.status(500).body(e.getMessage());
         }
+    }
+
+    @PostMapping("/api/directors/")
+    public ResponseEntity<?> postDirector(@RequestBody Director director){
+        try {
+            Director newDirector=directorService.postDirector(director);
+            return ResponseEntity.status(201).body(newDirector);
+        }catch (Exception e){
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/api/directors/{id}")
+    public ResponseEntity<?> putDirectorById(@PathVariable Integer id, @RequestBody Director director){
+        try{
+            Director UpdatedDirector=directorService.putDirectorById(id,director);
+            if(UpdatedDirector!=null){
+                return ResponseEntity.ok(UpdatedDirector);
+            }else {
+                return ResponseEntity.status(404).body("No hay un director con id "+id);
+            }
+        }catch (Exception e){
+            return ResponseEntity.status(500).body(e.getMessage());
+
+        }
+    }
+    @DeleteMapping("/api/directors/{id}")
+    public ResponseEntity<?> deleteDirectorById(@PathVariable Integer id){
+        try {
+            if(directorService.deleteDirectorById(id)){
+                return ResponseEntity.ok("Director Eliminado correctamente");
+            }else{
+                return ResponseEntity.status(404).body("Director No encontrado con id: "+id);
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+
     }
 }
