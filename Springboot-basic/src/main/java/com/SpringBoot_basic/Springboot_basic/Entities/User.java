@@ -9,15 +9,15 @@ public class User {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "username")
+    @Column(name = "username",nullable = false,unique = true)
     private String username;
-    @Column(name ="email")
+    @Column(name ="email",nullable = false,unique = true)
     private String email;
 
-    @Column(name = "password")
+    @Column(name = "password",nullable = false)
     private String password;
 
-    @Column(name = "role")
+    @Column(name = "role",nullable = false)
     private Role role;
 
     public User(String username, Integer id, String email, Role role, String password) {
