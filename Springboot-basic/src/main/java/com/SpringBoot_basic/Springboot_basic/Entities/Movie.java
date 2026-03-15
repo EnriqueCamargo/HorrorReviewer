@@ -24,8 +24,6 @@ public class Movie {
     private Genre genre;
     @Column(name="releasedate",nullable = false)
     private LocalDate releaseDate;
-    @Column(name = "rating", nullable = false)
-    private BigDecimal rating;
     @Column(name="available",nullable = false)
     private boolean available;
     @ManyToOne
@@ -36,12 +34,11 @@ public class Movie {
     public Movie() {
     }
 
-    public Movie(String title, Integer length, Genre genre, LocalDate releaseDate, BigDecimal rating, boolean available, Director director) {
+    public Movie(String title, Integer length, Genre genre, LocalDate releaseDate, boolean available, Director director) {
         this.title = title;
         this.length = length;
         this.genre = genre;
         this.releaseDate = releaseDate;
-        this.rating = rating;
         this.available = available;
         this.director = director;
     }
@@ -84,14 +81,6 @@ public class Movie {
 
     public void setReleaseDate(LocalDate releaseDate) {
         this.releaseDate = releaseDate;
-    }
-
-    public BigDecimal getRating() {
-        return rating;
-    }
-
-    public void setRating(BigDecimal rating) {
-        this.rating = rating;
     }
 
     public boolean isAvailable() {
