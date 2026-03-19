@@ -45,7 +45,7 @@ public class MovieService {
         }
 
 
-        if (movieRepository.existsByTitle(movie.getTitle())) {
+        if (movieRepository.existsByTitleContainingIgnoreCase(movie.getTitle())) {
             throw new RuntimeException("La película '" + movie.getTitle() + "' ya existe.");
         }
         movie.setId(null);

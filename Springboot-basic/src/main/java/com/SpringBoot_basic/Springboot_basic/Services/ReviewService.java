@@ -5,9 +5,10 @@ import com.SpringBoot_basic.Springboot_basic.Repositories.MovieRepository;
 import com.SpringBoot_basic.Springboot_basic.Repositories.ReviewRepository;
 import com.SpringBoot_basic.Springboot_basic.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class ReviewService {
     @Autowired
     private ReviewRepository reviewRepository;
@@ -23,6 +24,7 @@ public class ReviewService {
     public Review getReviewById(Integer id){
         return reviewRepository.findById(id).orElse(null);
     }
+
     public List<Review> getAllReviewsByMovieId(Integer id){
         if(movieRepository.existsById(id)){
             List<Review> reviewList=reviewRepository.findAll();
@@ -32,9 +34,9 @@ public class ReviewService {
         }
     }
     public List<Review> getAllReviewsbyMovieTitle(String title){
-        if(movieRepository.existsByTitle(title)){
+        if(movieRepository.existsByTitleContainingIgnoreCase(title)){
             List<Review> reviewList=reviewRepository.findAll();
-            return reviewList.stream().filter(review -> review.getMovie().getTitle()==title).toList();
+            return reviewList.stream().filter(review -> review.getMovie().getTitle().equalsIgnoreCase(title)).toList();
         }else{
             return null;
         }
@@ -48,13 +50,13 @@ public class ReviewService {
         }
     }
     public List<Review> getAllReviewsByUserName(String username){
-        if(userRepository.existsByUsername(username)){
+        if(userRepository.existsByUsernameContainingIgnoreCase(username)){
             List<Review> reviewList= reviewRepository.findAll();
-            return reviewList.stream().filter(review -> review.getUser().getUsername()==username).toList();
+            return reviewList.stream().filter(review -> review.getUser().getUsername().equalsIgnoreCase(username)).toList();
         }else {
             return null;
         }
-        
+
     }
 
     public Review postReview(Review review){

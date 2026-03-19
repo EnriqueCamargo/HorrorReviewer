@@ -8,7 +8,7 @@ import java.util.List;
 
 @Repository
 public interface MovieRepository extends JpaRepository<Movie,Integer> {
-    public Boolean existsByTitle(String title);
+    Boolean existsByTitleContainingIgnoreCase(String title);
     List<Movie> findByDirectorId(Integer directorId);
     List<Movie> findByDirectorNameContainingIgnoreCase(String directorName);
 }
