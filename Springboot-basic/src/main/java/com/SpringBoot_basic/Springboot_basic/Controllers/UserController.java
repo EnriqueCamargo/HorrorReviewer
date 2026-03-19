@@ -41,13 +41,41 @@ public class UserController {
         }
     }
 
-    @PostMapping("/api/users")
+    @PostMapping("/api/users/")
     public ResponseEntity<?>postNewUser(@RequestBody User user){
         try {
             User newUser=userService.postUser(user);
             return ResponseEntity.ok(newUser);
         }catch (Exception e){
-            return ResponseEntity.status(400).body(e.getMessage());
+            return ResponseEntity.status(500).body(e.getMessage());
         }
+    }
+    @PutMapping("/api/users/update/{id}")
+    public ResponseEntity<?> putUser(@PathVariable Integer id,@RequestBody User user){
+        try {
+            User updatedUser=userService.UpdateUser(user,id);
+            if(updatedUser!=null){
+                return ResponseEntity.ok(updatedUser);
+
+            }else {
+                return ResponseEntity.status(404).body("No hay un usuario con id "+id);
+            }
+            } catch (Exception e) {
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+    }
+    @DeleteMapping("/api/users/{id}")
+    public ResponseEntity<?> deleteUserById(@PathVariable Integer id){
+        try{
+            if(userService.deleteUser(id)){
+                return ResponseEntity.ok("Usuario Eliminado Exitosamente");
+            }else{
+                return ResponseEntity.status(404).body("Usuario no encontrado o no existe");
+            }
+        }catch (Exception e){
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+
+
     }
 }
