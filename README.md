@@ -1,9 +1,13 @@
-_   _                            ____                      _ 
- | | | | ___  _ __ _ __ ___  _ __ |  _ \ _____   _(_) _____      _ __ 
- | |_| |/ _ \| '__| '__/ _ \| '__|| |_) / _ \ \ / / |/ _ \ \ /\ / / '__|
- |  _  | (_) | |  | | | (_) | |   |  _ <  __/\ V /| |  __/\ V  V /| |   
- |_| |_|\___/|_|  |_|  \___/|_|   |_| \_\___| \_/ |_|\___| \_/\_/ |_|   
+# 🪓 HORROR REVIEWER API 🩸
+
+```text
+ _   _                            ____                      _ 
+| | | | ___  _ __ _ __ ___  _ __ |  _ \ _____   _(_) _____      _ __ 
+| |_| |/ _ \| '__| '__/ _ \| '__|| |_) / _ \ \ / / |/ _ \ \ /\ / / '__|
+|  _  | (_) | |  | | | (_) | |   |  _ <  __/\ V /| |  __/\ V  V /| |   
+|_| |_|\___/|_|  |_|  \___/|_|   |_| \_\___| \_/ |_|\___| \_/\_/ |_|   
                                                                         
+   - B A C K E N D   E V O L U T I O N -                        
    - B A C K E N D   E V O L U T I O N -
 
 A specialized RESTful API ecosystem for Horror Cinema enthusiasts. This project manages a database of legendary horror directors, cult classics, and user reviews, evolving from a simple CRUD to a secure, production-ready backend.
