@@ -22,7 +22,7 @@ A specialized RESTful API ecosystem for Horror Cinema enthusiasts. This project 
 
     Security: Spring Security & JWT
 
-    Tools: Maven, Hibernate (JPA), Postman, Linux (Ubuntu environment).
+    Tools: Gradle, Hibernate (JPA), Postman, Linux (Ubuntu environment).
 
 📌 Roadmap & Versions
 📂 v1.0.0 | Foundation (Basic CRUD)
