@@ -1,0 +1,82 @@
+package com.HorrorReviewerV2.Services;
+
+import com.HorrorReviewerV2.Entities.Review;
+import com.HorrorReviewerV2.Repositories.MovieRepository;
+import com.HorrorReviewerV2.Repositories.ReviewRepository;
+import com.HorrorReviewerV2.Repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+@Service
+public class ReviewService {
+    @Autowired
+    private ReviewRepository reviewRepository;
+    @Autowired
+    private MovieRepository movieRepository;
+    @Autowired
+    private UserRepository userRepository;
+
+    public List<Review> getAllReviews(){
+        return reviewRepository.findAll();
+    }
+
+    public Review getReviewById(Integer id){
+        return reviewRepository.findById(id).orElse(null);
+    }
+
+    public List<Review> getAllReviewsByMovieId(Integer id){
+        if(movieRepository.existsById(id)){
+            List<Review> reviewList=reviewRepository.findAll();
+            return reviewList.stream().filter(review -> review.getMovie().getId()==id).toList();
+        }else {
+            return null;
+        }
+    }
+    public List<Review> getAllReviewsbyMovieTitle(String title){
+        if(movieRepository.existsByTitleContainingIgnoreCase(title)){
+            List<Review> reviewList=reviewRepository.findAll();
+            return reviewList.stream().filter(review -> review.getMovie().getTitle().equalsIgnoreCase(title)).toList();
+        }else{
+            return null;
+        }
+    }
+    public List<Review> getAllReviewsByUserId(Integer id){
+        if(userRepository.existsById(id)){
+            List<Review> reviewList= reviewRepository.findAll();
+            return reviewList.stream().filter(review -> review.getUser().getId()==id).toList();
+        }else {
+            return null;
+        }
+    }
+    public List<Review> getAllReviewsByUserName(String username){
+        if(userRepository.existsByUsernameContainingIgnoreCase(username)){
+            List<Review> reviewList= reviewRepository.findAll();
+            return reviewList.stream().filter(review -> review.getUser().getUsername().equalsIgnoreCase(username)).toList();
+        }else {
+            return null;
+        }
+
+    }
+
+    public Review postReview(Review review){
+        return reviewRepository.save(review);
+    }
+    public Review putReview(Integer id,Review review){
+        if(reviewRepository.existsById(id)){
+            review.setId(id);
+            return reviewRepository.save(review);
+        }else{
+            return null;
+        }
+    }
+    public Boolean deleteReview(Integer id){
+        if(reviewRepository.existsById(id)){
+            reviewRepository.deleteById(id);
+            return true;
+        }else{
+            return false;
+        }
+    }
+}
+
